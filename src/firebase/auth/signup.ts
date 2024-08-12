@@ -1,5 +1,5 @@
 import firebase_app from "../config";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
 
 // Get the authentication instance using the Firebase app
 const auth = getAuth(firebase_app);
@@ -11,6 +11,9 @@ export default async function signUp(email: string, password: string) {
 
   try {
     result = await createUserWithEmailAndPassword(auth, email, password); // Create a new user with email and password
+     if (result.user && !result.user.emailVerified ) {
+            await sendEmailVerification(result.user); // Send email verification to the user
+    }
   } catch (e) {
     error = e; // Catch and store any error that occurs during sign-up
   }
