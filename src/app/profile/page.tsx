@@ -2,6 +2,7 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import {appConfig} from "@/app/config";
 
 function Page(): JSX.Element {
     // Access the user object from the authentication context
@@ -14,7 +15,7 @@ function Page(): JSX.Element {
     console.log(user.accessToken);
 
     useEffect(() => {
-        fetch('https://dev-api-permeso.savenko.tech/api/private/users/profile/',
+        fetch(appConfig.apiURL + '/api/private/users/profile/',
             {
                 headers: {
                     Authorization: `Bearer ${user.accessToken}`
@@ -34,7 +35,7 @@ function Page(): JSX.Element {
             Please enter your full name:
             <form onSubmit={(e) => {
                 e.preventDefault()
-                fetch('https://dev-api-permeso.savenko.tech/api/private/users/profile/name',
+                fetch(appConfig.apiURL + '/api/private/users/profile/name',
                     {
                         method: 'POST',
                         headers: {

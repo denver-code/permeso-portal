@@ -2,6 +2,7 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import {appConfig} from "@/app/config";
 
 function Page(): JSX.Element {
     // Access the user object from the authentication context
@@ -24,7 +25,7 @@ function Page(): JSX.Element {
 
     useEffect(() => {
 
-        fetch('https://dev-api-permeso.savenko.tech/api/private/users/membership/my',
+        fetch(appConfig.apiURL + '/api/private/users/membership/my',
             {
                 headers: {
                     Authorization: `Bearer ${user.accessToken}`
@@ -34,7 +35,7 @@ function Page(): JSX.Element {
             .then((data) => {
                 setMembership(data)
 
-                fetch(`https://dev-api-permeso.savenko.tech/api/private/users/plans/${data.plan_id}`,
+                fetch(appConfig.apiURL + `/api/private/users/plans/${data.plan_id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${user.accessToken}`
@@ -69,7 +70,7 @@ function Page(): JSX.Element {
 
             <button
                 onClick={ () => {
-                    fetch(`https://dev-api-permeso.savenko.tech/api/private/users/membership/${membership.id}`,
+                    fetch(appConfig.apiURL + `/api/private/users/membership/${membership.id}`,
                         {
                             method: 'DELETE',
                             headers: {
