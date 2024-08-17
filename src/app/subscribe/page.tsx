@@ -24,7 +24,7 @@ function Page(): JSX.Element {
 
 
     useEffect(() => {
-        fetch('https://api-permeso.savenko.tech/api/private/users/membership/all-plans',
+        fetch('https://dev-api-permeso.savenko.tech/api/private/users/membership/all-plans',
             {
                 headers: {
                     Authorization: `Bearer ${user.accessToken}`
@@ -53,7 +53,7 @@ function Page(): JSX.Element {
                             <p>Up to {plan.max_councils} Councils</p>
                             <button onClick={() => {
                                 console.log(plan.id);
-                                fetch('https://api-permeso.savenko.tech/api/private/users/membership/subscribe/'+ plan.id,
+                                fetch('https://dev-api-permeso.savenko.tech/api/private/users/membership/subscribe/'+ plan.id,
                                     {
                                         // method: 'POST',
                                         headers: {
@@ -64,7 +64,7 @@ function Page(): JSX.Element {
                                     })
                                     .then((res) => {
                                         if (res.status === 200) {
-                                            fetch('https://api-permeso.savenko.tech/api/private/stripe/customers-portal-link',
+                                            fetch('https://dev-api-permeso.savenko.tech/api/private/stripe/customers-portal-link',
                                                 {
                                                     headers: {
                                                         Authorization: `Bearer ${user.accessToken}`

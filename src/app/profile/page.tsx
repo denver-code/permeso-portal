@@ -14,7 +14,7 @@ function Page(): JSX.Element {
     console.log(user.accessToken);
 
     useEffect(() => {
-        fetch('https://api-permeso.savenko.tech/api/private/users/profile/',
+        fetch('https://dev-api-permeso.savenko.tech/api/private/users/profile/',
             {
                 headers: {
                     Authorization: `Bearer ${user.accessToken}`
@@ -34,7 +34,7 @@ function Page(): JSX.Element {
             Please enter your full name:
             <form onSubmit={(e) => {
                 e.preventDefault()
-                fetch('https://api-permeso.savenko.tech/api/private/users/profile/name',
+                fetch('https://dev-api-permeso.savenko.tech/api/private/users/profile/name',
                     {
                         method: 'POST',
                         headers: {
@@ -61,7 +61,7 @@ function Page(): JSX.Element {
             <h1>Your email: <b>{data.email}</b></h1>
             <h2>Your name: <b>{data.name}</b></h2>
             <button onClick={() => {
-                fetch('https://api-permeso.savenko.tech/api/private/stripe/customers-portal-link',
+                fetch('https://dev-api-permeso.savenko.tech/api/private/stripe/customers-portal-link',
                     {
                         headers: {
                             Authorization: `Bearer ${user.accessToken}`

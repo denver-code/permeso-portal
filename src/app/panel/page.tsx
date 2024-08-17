@@ -21,7 +21,7 @@ function Page(): JSX.Element {
 
     useEffect(() => {
 
-        fetch('https://api-permeso.savenko.tech/api/private/users/membership/my',
+        fetch('https://dev-api-permeso.savenko.tech/api/private/users/membership/my',
             {
                 headers: {
                     Authorization: `Bearer ${user.accessToken}`
@@ -57,6 +57,11 @@ function Page(): JSX.Element {
         return (
             <div>
                 <h2>You have active membership!</h2>
+                <button
+                    onClick={ () => router.push( "/membership" ) }
+                >
+                    Manage
+            </button>
 
             </div>
         )
