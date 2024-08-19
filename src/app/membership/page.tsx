@@ -78,7 +78,7 @@ function Page(): JSX.Element {
                             }
                         })
                         .then((res) => {
-                            router.push("/panel")
+                            router.push("/dashboard")
                         })
                         
                 } }
@@ -87,9 +87,9 @@ function Page(): JSX.Element {
             </button>
 
             <button
-                onClick={ () => router.push( "/panel" ) }
+                onClick={ () => router.push( "/dashboard" ) }
             >
-                Back to Panel
+                Back to dashboard
             </button>
         </>
 
