@@ -107,7 +107,7 @@ function Page(): JSX.Element {
             <div className="bg-orange-500 text-gray-900 py-5 px-10 h-min rounded-2xl mx-auto mt-8">
                 <div className="flex items-center justify-between">
                     <p className="text-lg">
-                        You don't have a subscription yet, <a href="/subscribe"
+                        You don&apos;t have a subscription yet, <a href="/subscribe"
                                                                    className="font-bold hover:underline">follow this
                         link to view our pricing!</a>
                     </p>

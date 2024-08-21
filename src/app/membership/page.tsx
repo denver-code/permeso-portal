@@ -129,10 +129,12 @@ function Page(): JSX.Element {
                     {showCancelConfirmation && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                             <div className="bg-zinc-900 text-white p-8 rounded-lg shadow-lg w-full max-w-md">
-                                <h3 className="text-lg font-bold mb-4">Dangerous Area</h3>
+                                <h3 className="text-lg font-bold mb-4">Canceling Membership | Dangerous Area</h3>
                                 <p className="mb-4">
                                     Canceling your membership will remove your access to the platform. This action
-                                    cannot be undone.
+                                    cannot be undone. <br/>
+                                    Your membership will become inactive immediately. <br/>
+                                    Are you sure you want to cancel your membership?
                                 </p>
                                 <div className="flex justify-end space-x-2">
                                     <button
@@ -169,7 +171,7 @@ function Page(): JSX.Element {
                     {showNotification && (
                         <div
                             className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-md shadow-lg">
-                            We're glad you've decided to keep your subscription!😇
+                            We&apos;re glad you&apos;ve decided to keep your subscription!😇
                         </div>
                     )}
                 </div>
