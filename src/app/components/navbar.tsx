@@ -36,6 +36,13 @@ function Navbar(): JSX.Element {
                     {isDropdownOpen && (
                         <div className="absolute right-0 p-1 w-48 rounded-md shadow-lg bg-black border border-white ring-1 ring-black ring-opacity-5">
                             <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                {/* user Email */}
+                                <div className="block px-4 py-2 text-sm text-zinc-400 font-bold">
+                                    {user.email}
+                                </div>
+                                {/* divider */}
+                                <div className="border-t border-zinc-700 my-2"></div>
+                                {/* Profile and Logout */}
                                 {[
                                     { name: "Profile", path: "/profile" },
                                     { name: "Logout", path: "/logout" },
