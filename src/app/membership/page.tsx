@@ -132,8 +132,8 @@ function Page(): JSX.Element {
                                 <h3 className="text-lg font-bold mb-4">Canceling Membership | Dangerous Area</h3>
                                 <p className="mb-4">
                                     Canceling your membership will remove your access to the platform. This action
-                                    cannot be undone. <br/>
-                                    Your membership will become inactive immediately. <br/>
+                                    cannot be undone. <br/><br/>
+                                    Your membership will become inactive immediately. <br/><br/>
                                     Are you sure you want to cancel your membership?
                                 </p>
                                 <div className="flex justify-end space-x-2">

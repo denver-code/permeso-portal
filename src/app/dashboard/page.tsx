@@ -33,7 +33,6 @@ function Page(): JSX.Element {
         }
     }, [user, router]);
 
-    console.log(user.accessToken);
 
     useEffect(() => {
         fetch(appConfig.apiURL + '/api/private/users/membership/my', {
