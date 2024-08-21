@@ -5,21 +5,6 @@ import { useEffect, useState } from "react";
 import { appConfig } from "@/app/config";
 import Navbar from "../components/navbar";
 
-// {
-//     "_id": "66be1a672dcc57e9cea1e53f",
-//     "user_id": "66b64c34bb8eae5a408d236e",
-//     "firebase_user_id": "VWAOYSVmiYeQL1ZCLWYtH1jhxGE3",
-//     "stripe_user_id": "cus_QdCer97WLCyxqA",
-//     "stripe_subscription_id": "sub_1Po5JqJkU51onNgIdlPIMEQN",
-//     "plan_id": "66b0e54c654bec74cd391867",
-//     "status": "active",
-//     "period_start": 1723734630.0,
-//     "period_end": 1724339430.0,
-//     "created_at": 1723734631.266733,
-//     "updated_at": 1723043979.198615,
-//     "meta": {}
-// }
-// Or null if not subscribed
 
 interface MembershipResponse {
     _id: string;
@@ -48,6 +33,8 @@ function Page(): JSX.Element {
         }
     }, [user, router]);
 
+    console.log(user.accessToken);
+
     useEffect(() => {
         fetch(appConfig.apiURL + '/api/private/users/membership/my', {
             headers: {
@@ -74,7 +61,6 @@ function Page(): JSX.Element {
                     {[
                         { name: "Overview", path: "/dashboard" },
                         { name: "Membership", path: "/membership" },
-                        { name: "Settings", path: "/settings" },
                     ].map((item) => (
                         <button
                             key={item.name}

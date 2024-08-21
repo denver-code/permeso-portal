@@ -102,6 +102,12 @@ function Page(): JSX.Element {
                     <p>
                         <span className="font-bold">Status:</span> {membership?.status}
                     </p>
+                    <button
+                        className="text-white bg-zinc-700 rounded-lg shadow-lg font-bold p-2 mt-5"
+                        onClick={() => router.push('/selections')}
+                    >
+                        Manage My Selections
+                    </button>
                 </div>
                 <div className="relative">
                     <button
