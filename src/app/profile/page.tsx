@@ -127,8 +127,8 @@ function Page(): JSX.Element {
                 <div className="flex flex-col container mx-auto px-7 py-7 bg-black rounded-lg border border-zinc-700 w-full divide-y divide-zinc-800">
 
                 <div className="flex flex-row justify-between py-6 items-baseline">
-                  <div className="flex flex-row space-x-24">
-                    <h1 className="text-xl w-24">Full Name</h1>
+                  <div className="flex flex-row space-x-16 md:space-x-24">
+                    <h1 className="text-xl sw-24 md:w-24">Full Name</h1>
                      <h1 className="text-xl font-semibold">{profile?.name}</h1>
                   </div>
                   {/*<button className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-1 px-2 rounded inline-flex items-center">*/}
@@ -138,8 +138,8 @@ function Page(): JSX.Element {
 
 
                 <div className="flex flex-row justify-between py-6 items-baseline">
-                  <div className="flex flex-row space-x-24">
-                    <h1 className="text-xl w-24">Email</h1>
+                  <div className="flex flex-row space-x-16 md:space-x-24">
+                    <h1 className="text-xl sw-24 md:w-24">Email</h1>
                      <h1 className="text-xl font-semibold">{profile?.email}</h1>
                   </div>
                 </div>
@@ -165,7 +165,7 @@ function Page(): JSX.Element {
                 </div>
 
                 <div className="flex flex-row justify-between py-6 items-baseline">
-                  <div className="flex flex-row space-x-12">
+                  <div className="flex flex-row space-x-4 md:space-x-12">
                     <h1 className="text-xl">PAT</h1>
                       { pat?.is_active ? <>
                           <div className="bg-green-500 text-white py-1 px-2 rounded inline-flex items-center">

@@ -55,7 +55,7 @@ function Page(): JSX.Element {
 
     function Sidebar() {
         return (
-            <div className="w-60 bg-black text-gray-300 h-full py-6 px-3 space-y-4">
+            <div className="sm:w-24 md:w-60 bg-black text-gray-300 h-full py-6 px-3 space-y-4">
                 <nav className="space-y-1">
                     {[
                         { name: "Overview", path: "/dashboard" },
