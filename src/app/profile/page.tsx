@@ -1,7 +1,7 @@
 'use client'
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import {useState, useEffect, FormEvent} from "react";
 import Navbar from "../components/navbar";
 import { useClipboard } from '@mantine/hooks';
 import { IconCopy, IconCheck } from '@tabler/icons-react';
@@ -31,7 +31,7 @@ function Page(): JSX.Element {
     const [isLoading, setLoading] = useState(true)
     const clipboard = useClipboard();
 
-    console.log(user.accessToken);
+    // console.log(user.accessToken);
 
 
     useEffect(() => {
@@ -62,39 +62,62 @@ function Page(): JSX.Element {
 
 
     if (isLoading) return <p><LoaderIndicator/></p>
-    if (!profile) return <p>No profile data</p>
-    if (!isLoading && !profile.name) return (
-        <div>
-            Please enter your full name:
-            <form onSubmit={(e) => {
-                e.preventDefault()
+    if (!profile) return <p>No profile data, please reload the page, or contact technical support.</p>
 
-                let name = (e.target as HTMLFormElement).name
-                if (!name) {
-                    alert('Please enter your name')
-                }
+    if (!isLoading && !profile.name) {
+        return (
+            <div className="flex items-center justify-center h-screen bg-black">
+                <div className="bg-zinc-900 p-8 rounded-lg shadow-lg w-full max-w-md">
+                    <h2 className="text-2xl font-bold text-white mb-4">
+                        Please enter your full name:
+                    </h2>
+                    <form
+                        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+                            e.preventDefault();
 
-                fetch(appConfig.apiURL + '/api/private/users/profile/name',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${user.accessToken}`
-                        },
-                        body: JSON.stringify({name: name})
-                    })
-                    .then((res) => res.json())
-                    .then((data) => {
-                       // refresh the page
-                        window.location.reload()
-                    })
-            }
-            }>
-                <input type="text" name="name" className="text-black" />
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    )
+                            const formData = new FormData(e.currentTarget)
+                            const name = formData.get('name') as string;
+                            if (!name) return alert('Please enter your full name');
+
+                            console.log(name);
+
+                            fetch(`${appConfig.apiURL}/api/private/users/profile/name`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Authorization: `Bearer ${user.accessToken}`,
+                                },
+                                body: JSON.stringify({
+                                    name
+                                }),
+                            })
+                                .then((res) => res.json())
+                                .then((data) => {
+                                    // refresh the page
+                                    window.location.reload();
+                                })
+                             .catch((err) => console.error("Error:", err))
+                        }}
+                        className="space-y-4"
+                    >
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Full Name"
+                            className="bg-zinc-800 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-white w-full"
+                        />
+                        <button
+                            type="submit"
+                            className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
 
     function ProfileSection() {
         return <>
