@@ -2,6 +2,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import firebase_app from '@/firebase/config';
+import {LoaderIndicator} from "@/app/components/LoaderIndicator";
 
 // Initialize Firebase auth instance
 const auth = getAuth( firebase_app );
@@ -47,9 +48,7 @@ export function AuthContextProvider( { children }: AuthContextProviderProps ): J
   // Provide the authentication context to child components
   return (
     <AuthContext.Provider value={{ user }}>
-      {loading ? <div className="flex items-center justify-center h-screen">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white" />
-        </div> : children}
+      {loading ? <LoaderIndicator/> : children}
     </AuthContext.Provider>
   );
 }
