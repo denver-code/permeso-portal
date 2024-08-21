@@ -2,13 +2,34 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import {appConfig} from "@/app/config";
+import Navbar from "@/app/components/navbar";
+
+
+export interface Plan {
+    id: string;
+    title: string;
+    description: string;
+    interval: string;
+    total_uses: number;
+    max_councils: number;
+    price: number;
+    currency: string;
+    status: string;
+}
+
+interface PlansResponse {
+    data: Plan[];
+    total: number;
+    status: string;
+}
 
 function Page(): JSX.Element {
     // Access the user object from the authentication context
     // const { user } = useAuthContext();
     const { user } = useAuthContext() as { user: any }; // Use 'as' to assert the type as { user: any }
     const router = useRouter();
-    const [plans, setPlans] = useState(null)
+    const [plans, setPlans] = useState<Plan[]>([])
     const [isLoading, setLoading] = useState(true)
 
     console.log(user);
@@ -24,7 +45,19 @@ function Page(): JSX.Element {
 
 
     useEffect(() => {
-        fetch('https://dev-api-permeso.savenko.tech/api/private/users/membership/all-plans',
+        fetch(appConfig.apiURL + '/api/private/users/membership/my',
+            {
+                headers: {
+                    Authorization: `Bearer ${user.accessToken}`
+                }
+            })
+            .then((res) => res.json())
+            .then((data) => {
+               if (data != null) {
+                     return router.push("/membership")
+               }
+            })
+        fetch(appConfig.apiURL + '/api/private/users/plans/',
             {
                 headers: {
                     Authorization: `Bearer ${user.accessToken}`
@@ -40,61 +73,77 @@ function Page(): JSX.Element {
 
     if (isLoading) return <p>Loading...</p>
 
-    function plansList() {
+    function PlansList() {
         return (
-            <div>
-                {plans.map((plan) => {
-                    return (
-                        <div key={plan.id}>
-                            <h2>{plan.name}</h2>
-                            <p>{plan.description}</p>
-                            <p>$100 per {plan.interval}</p>
-                            <p>{plan.total_uses} uses per week</p>
-                            <p>Up to {plan.max_councils} Councils</p>
-                            <button onClick={() => {
-                                console.log(plan.id);
-                                fetch('https://dev-api-permeso.savenko.tech/api/private/users/membership/subscribe/'+ plan.id,
-                                    {
-                                        // method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                            Authorization: `Bearer ${user.accessToken}`
-                                        },
-
-                                    })
-                                    .then((res) => {
-                                        if (res.status === 200) {
-                                            fetch('https://dev-api-permeso.savenko.tech/api/private/stripe/customers-portal-link',
-                                                {
-                                                    headers: {
-                                                        Authorization: `Bearer ${user.accessToken}`
-                                                    }
-                                                })
-                                                .then((res) => res.json())
-                                                .then((data) => {
-                                                    // open the data link in a new tab
-                                                    window.open(data.data, '_blank')
-
-                                                })
-                                        } else {
-                                            alert('Failed to subscribe')
+            <div className="flex flex-col items-center justify-center ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl">
+                    {plans.map((plan) => (
+                        <div
+                            key={plan.id}
+                            className="bg-zinc-900 text-white rounded-lg p-6 space-y-4 flex flex-col items-center justify-center"
+                        >
+                            <h2 className="text-2xl font-bold text-center">{plan.title}</h2>
+                            <p className="text-center">{plan.description}</p>
+                            <div className="space-y-2 text-center">
+                                <p>
+                                    <span className="font-bold">£{plan.price}</span> per <span
+                                    className="font-bold">{plan.interval}</span>
+                                </p>
+                                <p>
+                                    <span className="font-bold">{plan.total_uses}</span> collections per week
+                                </p>
+                                <p>
+                                    Up to <span className="font-bold">{plan.max_councils}</span> Councils
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    console.log(plan.id);
+                                    fetch(
+                                        `${appConfig.apiURL}/api/private/users/membership/subscribe/${plan.id}`,
+                                        {
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                Authorization: `Bearer ${user.accessToken}`,
+                                            },
                                         }
-                                    })
-
-                            }} >Subscribe</button>
+                                    )
+                                        .then((res) => {
+                                            if (res.status === 200) {
+                                                fetch(`${appConfig.apiURL}/api/private/stripe/customers-portal-link`, {
+                                                    headers: {
+                                                        Authorization: `Bearer ${user.accessToken}`,
+                                                    },
+                                                })
+                                                    .then((res) => res.json())
+                                                    .then((data) => {
+                                                        window.open(data.data, '_blank');
+                                                    });
+                                            } else {
+                                                alert('Failed to subscribe');
+                                            }
+                                        })
+                                        .catch((err) => console.error('Error:', err));
+                                }}
+                                className="bg-white text-gray-900 font-bold px-4 py-2 rounded-md hover:bg-gray-200"
+                            >
+                                Subscribe
+                            </button>
                         </div>
-                    )
-                })}
+                    ))}
+                </div>
             </div>
         )
     }
 
     return (
-        <>
-            <h1>Available Plans:</h1><br/>
-            {plansList()}
-
-        </>
+        <div className="flex flex-col min-h-screen bg-black">
+            <Navbar/>
+            <div className="flex-1 p-6 mx-auto items-center ">
+                <h1 className="text-3xl font-bold text-white pb-6">Choose a Plan</h1>
+                <PlansList/>
+            </div>
+        </div>
 
     );
 }

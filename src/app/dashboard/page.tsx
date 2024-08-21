@@ -5,12 +5,42 @@ import { useEffect, useState } from "react";
 import { appConfig } from "@/app/config";
 import Navbar from "../components/navbar";
 
+// {
+//     "_id": "66be1a672dcc57e9cea1e53f",
+//     "user_id": "66b64c34bb8eae5a408d236e",
+//     "firebase_user_id": "VWAOYSVmiYeQL1ZCLWYtH1jhxGE3",
+//     "stripe_user_id": "cus_QdCer97WLCyxqA",
+//     "stripe_subscription_id": "sub_1Po5JqJkU51onNgIdlPIMEQN",
+//     "plan_id": "66b0e54c654bec74cd391867",
+//     "status": "active",
+//     "period_start": 1723734630.0,
+//     "period_end": 1724339430.0,
+//     "created_at": 1723734631.266733,
+//     "updated_at": 1723043979.198615,
+//     "meta": {}
+// }
+// Or null if not subscribed
+
+interface MembershipResponse {
+    _id: string;
+    user_id: string;
+    firebase_user_id: string;
+    stripe_user_id: string;
+    stripe_subscription_id: string;
+    plan_id: string;
+    status: string;
+    period_start: number;
+    period_end: number;
+    created_at: number;
+    updated_at: number;
+    meta: any;
+}
+
 function Page(): JSX.Element {
     const { user } = useAuthContext() as { user: any };
     const router = useRouter();
-    const [membership, setMembership] = useState(null);
+    const [membership, setMembership] = useState<MembershipResponse | null>(null);
     const [isLoading, setLoading] = useState(true);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     useEffect(() => {
         if (user == null) {
@@ -85,12 +115,27 @@ function Page(): JSX.Element {
         );
     }
 
+    function GetMembershipBanner(){
+        // user don't have a membership, show banner that will redirect to membership page
+        return (
+            <div className="bg-orange-500 text-gray-900 py-5 px-10 h-min rounded-2xl mx-auto mt-8">
+                <div className="flex items-center justify-between">
+                    <p className="text-lg">
+                        You don't have a subscription yet, <a href="/subscribe"
+                                                                   className="font-bold hover:underline">follow this
+                        link to view our pricing!</a>
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="flex flex-col min-h-screen bg-black">
-            <Navbar />
+            <Navbar/>
             <div className="flex flex-1">
-                <Sidebar />
-                <Content />
+                <Sidebar/>
+                {membership == null ? <GetMembershipBanner/> : <Content/>}
             </div>
         </div>
     );

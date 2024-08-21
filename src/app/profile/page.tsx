@@ -30,7 +30,7 @@ function Page(): JSX.Element {
     const [pat, setPat] = useState<PATResponse["data"] | null>(null);
     const [isLoading, setLoading] = useState(true)
     const clipboard = useClipboard();
-
+    const router = useRouter();
     // console.log(user.accessToken);
 
 
@@ -94,7 +94,8 @@ function Page(): JSX.Element {
                                 .then((res) => res.json())
                                 .then((data) => {
                                     // refresh the page
-                                    window.location.reload();
+                                    // window.location.reload();
+                                    router.push('/subscribe')
                                 })
                              .catch((err) => console.error("Error:", err))
                         }}

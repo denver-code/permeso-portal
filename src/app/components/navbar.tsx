@@ -23,7 +23,7 @@ function Navbar(): JSX.Element {
                         onClick={() => router.push("/dashboard")}
                         className="text-white hover:text-gray-300"
                     >
-                    <div className="text-xl font-semibold">Dashboard</div>
+                    <div className="text-xl font-semibold">Permeso</div>
                     </button>
                 </div>
                 <div className="relative">
