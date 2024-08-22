@@ -75,15 +75,11 @@ function Page(): JSX.Element {
     const [isUpdating, setUpdating] = useState(false);
 
 
-    useEffect( () => {
-        // Redirect to the home page if the user is not logged in
-        if ( user == null ) {
-            router.push( "/" );
-        }
-        // }, [ user ] );
-    }, [ user, router ] ); // Include 'router' in the dependency array to resolve eslint warning
-
+   
     useEffect(() => {
+          if (user == null) {
+            return router.push("/");
+        }
   const fetchData = async () => {
     try {
       const headers = {

@@ -6,6 +6,7 @@ import Navbar from "../components/navbar";
 import { useClipboard } from '@mantine/hooks';
 import { IconCopy, IconCheck } from '@tabler/icons-react';
 import { appConfig } from "@/app/config";
+import { sendPasswordResetEmail } from "firebase/auth";
 import {LoaderIndicator} from "@/app/components/LoaderIndicator";
 
 interface ProfileResponse {
@@ -35,6 +36,9 @@ function Page(): JSX.Element {
 
 
     useEffect(() => {
+          if (user == null) {
+            return router.push("/");
+        }
         fetch(appConfig.apiURL + '/api/private/users/profile/',
             {
                 headers: {
@@ -44,19 +48,19 @@ function Page(): JSX.Element {
             .then((res) => res.json())
             .then((data) => {
                 setProfile(data.data)
+                 fetch(appConfig.apiURL + '/api/private/users/profile/security/pat',{
+                    headers: {
+                        Authorization: `Bearer ${user.accessToken}`
+                    }
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    setPat(data.data)
+                    setLoading(false)
+                })
             })
 
-        // /api/private/users/profile/security/pat
-        fetch(appConfig.apiURL + '/api/private/users/profile/security/pat',{
-            headers: {
-                Authorization: `Bearer ${user.accessToken}`
-            }
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            setPat(data.data)
-            setLoading(false)
-        })
+       
     }, [user])
 
 
@@ -157,9 +161,16 @@ function Page(): JSX.Element {
                     <h1 className="text-xl w-24">Password</h1>
                      <h1 className="text-xl font-semibold">*********</h1>
                   </div>
-                  {/*<button className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-1 px-2 rounded inline-flex items-center">*/}
-                  {/*    <span>Change</span>*/}
-                  {/*</button>*/}
+                  <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-1 px-2 rounded inline-flex items-center" onClick={()=>{
+                        sendPasswordResetEmail(user.auth, user.email).then(() => {
+                            alert('Password reset email sent to your email address')
+                        }
+                        ).catch((err) => {
+                            console.error(err)
+                        })
+                  }}>
+                     <span>Reset</span>
+                  </button>
                 </div>
 
                 <div className="flex flex-row justify-between py-6 items-baseline">

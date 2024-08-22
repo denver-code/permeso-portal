@@ -42,15 +42,11 @@ function Page(): JSX.Element {
     const [membership, setMembership] = useState<MembershipResponse | null>(null);
     const [activities, setActivities] = useState<RecentActivityResponse | null>(null);
     const [isLoading, setLoading] = useState(true);
-
+    
     useEffect(() => {
-        if (user == null) {
-            router.push("/");
+         if (user == null) {
+            return router.push("/");
         }
-    }, [user, router]);
-
-
-    useEffect(() => {
         fetch(appConfig.apiURL + '/api/private/users/membership/my', {
             headers: {
                 Authorization: `Bearer ${user.accessToken}`
@@ -77,7 +73,7 @@ function Page(): JSX.Element {
                         setLoading(false);
                     });
             });
-    }, [user]);
+    }, [user, router, setMembership, setActivities, setLoading]);
 
     if (isLoading) return <>
         <div className="flex items-center justify-center h-screen">
