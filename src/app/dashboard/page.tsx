@@ -148,8 +148,6 @@ function Page(): JSX.Element {
                     </div>
                     <div className="bg-black-900 p-4 rounded-lg border border-gray-500">
                         <h3 className="text-sm font-medium text-gray-400 mb-2">Average per Council</h3>
-                        {/* <p className="text-2xl font-semibold">{activities?.avarage_per_council}</p> */}
-                        {/* Rounded avarage */}
                         <p className="text-2xl font-semibold">
                                 {activities?.avarage_per_council
                                     ?  Math.round(activities?.avarage_per_council)
