@@ -21,8 +21,6 @@ function Page(): JSX.Element {
       return;
     }
 
-    // Sign in successful
-    console.log( result );
 
     // Redirect to the admin page
     // Typically you would want to redirect them to a protected page an add a check to see if they are admin or 

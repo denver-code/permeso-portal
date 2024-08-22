@@ -21,10 +21,26 @@ interface MembershipResponse {
     meta: any;
 }
 
+interface Activity {
+    council: string;
+    date: string;
+    status: string;
+    type: string;
+    download_link: string;
+}
+
+interface RecentActivityResponse {
+    total_applications: number;
+    total_councils: number;
+    avarage_per_council: number;
+    activity: Activity[];
+}
+
 function Page(): JSX.Element {
     const { user } = useAuthContext() as { user: any };
     const router = useRouter();
     const [membership, setMembership] = useState<MembershipResponse | null>(null);
+    const [activities, setActivities] = useState<RecentActivityResponse | null>(null);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -43,7 +59,23 @@ function Page(): JSX.Element {
             .then((res) => res.json())
             .then((data) => {
                 setMembership(data);
-                setLoading(false);
+
+                fetch(appConfig.apiURL + '/api/private/users/dashboard/recent-activity', {
+                    headers: {
+                        Authorization: `Bearer ${user.accessToken}`
+                    }
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setActivities(data.data);
+
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    })
+                    .finally(() => {
+                        setLoading(false);
+                    });
             });
     }, [user]);
 
@@ -74,6 +106,37 @@ function Page(): JSX.Element {
         );
     }
 
+    function RecentActivity(){
+        if (activities == null) return <p className="text-sm text-gray-500">No recent activity, but normally you would see a parsed councils data</p>;
+
+        return activities.activity.map((activity) => (
+            <div key={activity.council} className="flex items-center justify-between bg-black-900 p-4 rounded-lg border border-gray-500">
+                <div>
+                    <h3 className="text-sm font-medium text-gray-400 mb-2">{activity.council.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
+                    <p className="text-sm text-gray-500">{activity.date}</p>
+                </div>
+                <a onClick={()=>{
+                    fetch(activity.download_link, {
+                        headers: {
+                            Authorization: `Bearer ${user.accessToken}`
+                        }
+                    })
+                        .then((res) => res.blob())
+                        .then((blob) => {
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `${activity.council}.xlsx`;
+                            a.click();
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                        });
+                }} target="_blank" className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg">Download</a>
+            </div>
+        ));
+    }
+
     function Content() {
         return (
             <div className="flex-1 bg-black text-white p-6">
@@ -81,11 +144,17 @@ function Page(): JSX.Element {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div className="bg-black-900 p-4 rounded-lg border border-gray-500">
                         <h3 className="text-sm font-medium text-gray-400 mb-2">Applications</h3>
-                        <p className="text-2xl font-semibold">0</p>
+                        <p className="text-2xl font-semibold">{activities?.total_applications}</p>
                     </div>
                     <div className="bg-black-900 p-4 rounded-lg border border-gray-500">
                         <h3 className="text-sm font-medium text-gray-400 mb-2">Average per Council</h3>
-                        <p className="text-2xl font-semibold">0</p>
+                        {/* <p className="text-2xl font-semibold">{activities?.avarage_per_council}</p> */}
+                        {/* Rounded avarage */}
+                        <p className="text-2xl font-semibold">
+                                {activities?.avarage_per_council
+                                    ?  Math.round(activities?.avarage_per_council)
+                                    : 'N/A'}
+                       </p>
                     </div>
                     <div className="bg-black-900 p-4 rounded-lg border border-gray-500">
                         <h3 className="text-sm font-medium text-gray-400 mb-2">Usage</h3>
@@ -94,7 +163,10 @@ function Page(): JSX.Element {
                 </div>
                 <div className="mt-8">
                     <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
-                    <p className="text-sm text-gray-500">No recent activity, but normally you would see a parsed councils data</p>
+                    <div className="space-y-4">
+                        <RecentActivity/>
+                    </div>
+                    
                 </div>
             </div>
         );

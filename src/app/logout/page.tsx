@@ -8,8 +8,6 @@ function Page(): JSX.Element {
     const { user } = useAuthContext() as { user: any }; // Use 'as' to assert the type as { user: any }
     const router = useRouter();
 
-    console.log(user);
-
     useEffect( () => {
         // Redirect to the home page if the user is not logged in
         if ( user == null ) {

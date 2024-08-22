@@ -21,9 +21,6 @@ function Page(): JSX.Element {
       return;
     }
 
-    // Sign up successful
-    console.log( result );
-
     // Redirect to the admin page
     router.push( "/profile" );
   }

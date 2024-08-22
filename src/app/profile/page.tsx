@@ -79,8 +79,6 @@ function Page(): JSX.Element {
                             const name = formData.get('name') as string;
                             if (!name) return alert('Please enter your full name');
 
-                            console.log(name);
-
                             fetch(`${appConfig.apiURL}/api/private/users/profile/name`, {
                                 method: 'POST',
                                 headers: {
@@ -184,8 +182,6 @@ function Page(): JSX.Element {
 
                           <div className="flex flex-row space-x-2">
                               <button onClick={() => {
-                                  // refresh the page
-                                  // /api/private/users/profile/security/pat/deactivate
                                   fetch(appConfig.apiURL + '/api/private/users/profile/security/pat/deactivate',
                                       {
                                           method: 'PATCH',
@@ -260,7 +256,6 @@ function Page(): JSX.Element {
                         })
                         .then((res) => res.json())
                         .then((data) => {
-                            console.log(data.data)
                             window.open(data.data, '_blank')
 
                         })

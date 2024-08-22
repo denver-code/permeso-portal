@@ -32,8 +32,6 @@ function Page(): JSX.Element {
     const [plans, setPlans] = useState<Plan[]>([])
     const [isLoading, setLoading] = useState(true)
 
-    console.log(user);
-
     useEffect( () => {
         // Redirect to the home page if the user is not logged in
         if ( user == null ) {
@@ -98,7 +96,6 @@ function Page(): JSX.Element {
                             </div>
                             <button
                                 onClick={() => {
-                                    console.log(plan.id);
                                     fetch(
                                         `${appConfig.apiURL}/api/private/users/membership/subscribe/${plan.id}`,
                                         {
