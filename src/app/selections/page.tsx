@@ -174,7 +174,40 @@ function Page(): JSX.Element {
             return;
         }
 
-        if (!hasChanges()) {
+        let changedSelections: UpdateSelectionsRequest = {};
+        let hasChanges = false;
+
+        if (selections) {
+            // Check for changes in days
+            if (JSON.stringify(updatedSelections.days) !== JSON.stringify(selections.days)) {
+                changedSelections.days = updatedSelections.days;
+                hasChanges = true;
+            }
+
+            // Check for changes in councils
+            if (JSON.stringify(updatedSelections.councils) !== JSON.stringify(selections.councils)) {
+                changedSelections.councils = updatedSelections.councils;
+                hasChanges = true;
+            }
+
+            // Check for changes in receiving_types
+            if (JSON.stringify(updatedSelections.receiving_types) !== JSON.stringify(selections.receiving_types)) {
+                changedSelections.receiving_types = updatedSelections.receiving_types;
+                hasChanges = true;
+            }
+
+            // Check for changes in is_delivered_by_mail
+            if (updatedSelections.is_delivered_by_mail !== selections.is_delivered_by_mail) {
+                changedSelections.is_delivered_by_mail = updatedSelections.is_delivered_by_mail;
+                hasChanges = true;
+            }
+        } else {
+            // If there are no existing selections, send all fields
+            changedSelections = updatedSelections;
+            hasChanges = true;
+        }
+
+        if (!hasChanges) {
             alert('You have not made any changes to your selections.');
             return;
         }
@@ -188,7 +221,7 @@ function Page(): JSX.Element {
             const response = await fetch(`${appConfig.apiURL}/api/private/users/membership/${membership!._id}/selections`, {
                 method,
                 headers,
-                body: JSON.stringify(updatedSelections)
+                body: JSON.stringify(changedSelections)
             });
             if (!response.ok) {
                 throw new Error(`Failed to ${selections ? 'update' : 'set'} selections: ${response.statusText}`);
