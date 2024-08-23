@@ -1,5 +1,12 @@
 "use client";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import Link from 'next/link';
 import {useAuthContext} from "@/context/AuthContext";
 import { Button } from '@/components/ui/button'
@@ -14,7 +21,6 @@ import { JSX, SVGProps } from 'react';
 import {HorizontalHero} from "@/components/common/horizontaHero";
 import {Badge} from "@/components/ui/badge";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {Terminal} from "lucide-react";
 
 export default function Home() {
   const {user} = useAuthContext() as { user: any };
@@ -35,22 +41,61 @@ export default function Home() {
 
           <nav className="ml-auto flex gap-4 sm:gap-6">
 
-            {
-              user ? (
-                  <Link href="/dashboard">
-                    <Button size="sm">Dashboard</Button>
-                  </Link>
-              ) : (
-                 <div className="flex gap-4">
-                     <Link href="/signin">
-                        <Button size="sm">Sign In</Button>
-                     </Link>
-                    <Link href="/signup">
-                            <Button size="sm">Sign Up</Button>
-                      </Link>
-                 </div>
-              )
+            {/*{*/}
+            {/*  user ? (*/}
+            {/*      <Link href="/dashboard">*/}
+            {/*        <Button size="sm">Dashboard</Button>*/}
+            {/*      </Link>*/}
+            {/*  ) : (*/}
+            {/*     <div className="flex gap-4">*/}
+            {/*         <Link href="/signin">*/}
+            {/*            <Button size="sm">Sign In</Button>*/}
+            {/*         </Link>*/}
+            {/*        <Link href="/signup">*/}
+            {/*                <Button size="sm">Sign Up</Button>*/}
+            {/*          </Link>*/}
+            {/*     </div>*/}
+            {/*  )*/}
 
+            {/*}*/}
+
+            {
+                user ? (
+                    <div className="mr-4">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <Button size="sm" asChild>
+                            <Link href={"/dashboard"}>Account</Link>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem asChild>
+                            <Link href={"/dashboard"}>Dashboard</Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator/>
+                          <DropdownMenuItem asChild>
+                            <Link href={"/logout"}>Logout</Link>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                ) : (
+                  <div className="mr-4">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <Button size="sm">Menu</Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem asChild>
+                          <Link href={"/signin"}>Sign In</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link href={"/signup"}>Sign Up</Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                )
             }
 
           </nav>
