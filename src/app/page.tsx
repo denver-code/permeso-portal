@@ -253,7 +253,7 @@ export default function Home() {
                         </div>
                       </div>
                       <p className="text-muted-foreground">
-                        "Permeso has been a game-changer for our business."
+                        &quot;Permeso has been a game-changer for our business.&quot;
                       </p>
                     </div>
                   </Card>
@@ -270,7 +270,7 @@ export default function Home() {
                         </div>
                       </div>
                       <p className="text-muted-foreground">
-                        "I highly recommend Permeso to any business!"
+                        &quot;I highly recommend Permeso to any business!&quot;
                       </p>
                     </div>
                   </Card>
