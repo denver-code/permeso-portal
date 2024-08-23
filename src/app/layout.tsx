@@ -1,7 +1,7 @@
 import { AuthContextProvider } from '@/context/AuthContext';
 import { Inter } from 'next/font/google';
 import { cn } from "@/lib/utils"
-import "./styles/globals.css"
+import "@/styles/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Footer } from '@/components/common/footer';
 

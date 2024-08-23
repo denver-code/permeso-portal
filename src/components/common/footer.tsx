@@ -1,50 +1,44 @@
 'use client'
 import Link from 'next/link'
 import Typography from '@/components/ui/typography'
+import {Badge} from "@/components/ui/badge";
+import {MountainIcon} from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="flex h-12 items-center justify-center w-full border-t">
-      <div className="w-full max-w-[1280px] md:px-8 px-4 flex place-content-center">
-        <div className="gap-x-11 md:flex flex-1 hidden">
-          <Link
-            href="/"
-            className="pointer flex items-center"
-          >
-            {/* <img src="/logo.svg" className="mr-3" /> */}
-            <Typography className="!text-white !text-base font-medium ">
-              Permeso
-            </Typography>
-          </Link>
+      <footer className="py-6 md:px-8 md:py-0">
+        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+          <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
+            <div className="flex flex-row space-x-4">
+              <Link href="/" className="flex items-center justify-center" prefetch={false}>
+                <MountainIcon className="h-6 w-6 text-primary"/>
+                <span className="sr-only">Permeso</span>
+              </Link>
+              <Link href="/" prefetch={false}>
+                <span className="font-bold">Permeso</span>
+              </Link>
+              <Badge>Alpha | Early Access</Badge>
+            </div>
+
+            Built by{" "}
+            <a
+                href="https://savenko.tech/about"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium underline underline-offset-4"
+            >
+              Ihor Savenko
+            </a>
+          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy-policy">
+              <span className="text-sm text-muted-foreground">Privacy Policy</span>
+            </Link>
+            <Link href="/terms-of-service">
+              <span className="text-sm text-muted-foreground">Terms of Service</span>
+            </Link>
+          </div>
         </div>
-        <div className="flex max-w-fit items-center gap-x-4">
-          <Link
-            href="https://map.sistilli.dev/public/coding/SaaS+Boilerplate"
-            target="_blank"
-            className="pointer block w-fit flex-1"
-          >
-            <Typography variant="p" className="w-max">
-              Book a demo
-            </Typography>
-          </Link>
-          <Link
-            href="/terms-of-service"
-            className="pointer block w-fit flex-1"
-          >
-            <Typography variant="p" className="w-max">
-              Terms of service
-            </Typography>
-          </Link>
-          <Link
-            href="/privacy-policy"
-            className="pointer block w-fit"
-          >
-            <Typography variant="p">
-              Privacy Policy
-            </Typography>
-          </Link>
-        </div>
-      </div>
-    </footer>
+      </footer>
   )
 }
