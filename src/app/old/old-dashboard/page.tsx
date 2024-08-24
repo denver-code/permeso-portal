@@ -3,7 +3,6 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { appConfig } from "@/app/config";
-import Navbar from "../components/navbar";
 
 
 
@@ -154,7 +153,7 @@ function Page(): JSX.Element {
 
     return (
         <div className="flex flex-col min-h-screen bg-black">
-            <Navbar/>
+
             <div className="flex flex-1">
                 <Sidebar/>
                 {membership == null ? <GetMembershipBanner/> : <Content/>}

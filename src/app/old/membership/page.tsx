@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {appConfig} from "@/app/config";
 import {LoaderIndicator} from "@/app/components/LoaderIndicator";
-import {Plan} from "@/app/old/subscribe/page";
 import {Navbar} from "@/components/common/navbar";
 
 

@@ -6,23 +6,6 @@ import {appConfig} from "@/app/config";
 import {Navbar} from "@/components/common/navbar";
 
 
-export interface Plan {
-    id: string;
-    title: string;
-    description: string;
-    interval: string;
-    total_uses: number;
-    max_councils: number;
-    price: number;
-    currency: string;
-    status: string;
-}
-
-interface PlansResponse {
-    data: Plan[];
-    total: number;
-    status: string;
-}
 
 function Page(): JSX.Element {
     // Access the user object from the authentication context
