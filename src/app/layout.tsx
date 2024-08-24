@@ -26,6 +26,7 @@ export default function RootLayout( { children }: { children: React.ReactNode } 
       */}
       <script async src="https://umami-azure-one.vercel.app/script.js"
               data-website-id="b26f43ac-2e62-4378-b63b-767ef44d6db6"></script>
+              
       <head/>
       <body 
          className={cn(

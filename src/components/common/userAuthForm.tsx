@@ -11,10 +11,15 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 import signIn from "@/firebase/auth/signIn";
 import {toast, useToast} from "@/components/ui/use-toast"
+import signUp from "@/firebase/auth/signup";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
+    isSignIn: boolean
+}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+    // get isSignIn from the props
+    const isSignIn = props.isSignIn;
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
     const router = useRouter();
     const { toast } = useToast()
@@ -37,23 +42,42 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             return;
         }
         // Attempt to sign in with provided email and password
-        const { result, error } = await signIn( email, password );
+        // const { result, error } = await signIn( email, password );
 
-        if ( error ) {
-            // Display and log any sign-in errors
-            console.log( error );
-            setIsLoading( false );
-            // @ts-ignore
-            toast(
-                {
-                    title: "Error",
-                    description: error.message,
-                }
-            )
-            return;
+        if ( isSignIn ) {
+            const { result, error } = await signIn( email, password );
+            if ( error ) {
+                // Display and log any sign-in errors
+                setIsLoading(false);
+                // @ts-ignore
+                toast(
+                    {
+                        title: "Error",
+                        description: error.message,
+                    }
+                )
+                return;
+            }
+        } else {
+            // Attempt to sign up with provided email and password
+            const { result, error } = await signUp( email, password );
+                if ( error ) {
+                    // Display and log any sign-in errors
+                    setIsLoading( false );
+                    // @ts-ignore
+                    toast(
+                        {
+                            title: "Error",
+                            description: error.message,
+                        }
+                    )
+                    return;
         }
 
-        router.push( "/dashboard" );
+
+        }
+
+        router.push( ( isSignIn ) ? "/dashboard" : "/profile" );
     }
 
     return (
@@ -93,7 +117,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                         {isLoading && (
                             <Loader className="mr-2 h-4 w-4 animate-spin"/>
                         )}
-                        Sign In
+                        {isSignIn ? "Sign In" : "Sign Up"}
                     </Button>
                 </div>
             </form>
@@ -109,11 +133,27 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </div>
             <Button variant="outline" type="button" disabled={isLoading}>
                 {isLoading ? (
-                    <Loader className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader className="mr-2 h-4 w-4 animate-spin"/>
                 ) : (
-                    <Github className="mr-2 h-4 w-4" />
+                    <Github className="mr-2 h-4 w-4"/>
                 )}{" "}
                 GitHub
+            </Button>
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t"/>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">
+           Forgot your password?
+          </span>
+                </div>
+            </div>
+            <Button variant="secondary" disabled={isLoading}>
+                {isLoading && (
+                    <Loader className="mr-2 h-4 w-4 animate-spin"/>
+                )}
+                Reset Password
             </Button>
         </div>
     )
