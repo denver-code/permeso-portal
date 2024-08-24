@@ -3,7 +3,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {appConfig} from "@/app/config";
-import Navbar from "@/app/components/navbar";
+import {Navbar} from "@/components/common/navbar";
 
 
 export interface Plan {

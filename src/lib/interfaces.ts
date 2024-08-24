@@ -28,3 +28,19 @@ interface RecentActivityResponse {
     avarage_per_council: number;
     activity: Activity[];
 }
+
+interface ProfileResponse {
+    data: {
+        email: string | "";
+        name: string | "";
+    };
+    status: string;
+}
+
+interface PATResponse {
+    data: {
+        pat: string;
+        is_active: boolean;
+    };
+    status: string;
+}

@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { appConfig } from "@/app/config";
 import { LoaderIndicator } from "@/app/components/LoaderIndicator";
-import { Plan } from "@/app/subscribe/page";
-import Navbar from "@/app/components/navbar";
+import { Plan } from "@/app/old/subscribe/page";
+import {Navbar} from "@/components/common/navbar";
 
 interface MembershipResponse {
     _id: string;
