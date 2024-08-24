@@ -21,7 +21,6 @@ function Page(): JSX.Element {
   const [isLoading, setLoading] = useState(true);
   const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
   const [showDangerousArea, setShowDangerousArea] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -123,7 +122,7 @@ function Page(): JSX.Element {
                          setShowCancelConfirmation(false);
 
                          toast({
-                            title: `Membership Cancelled`,
+                            title: `Membership Kept!`,
                             description: "We're glad you've decided to keep your subscription! 😇",
                              });
                     }}>Keep Membership</Button>
@@ -135,14 +134,7 @@ function Page(): JSX.Element {
           </CardFooter>
         </Card>
       </div>
-      {showNotification && (
-        <Alert className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
-          <AlertTitle>Subscription Kept</AlertTitle>
-          <AlertDescription>
-            We're glad you've decided to keep your subscription! 😇
-          </AlertDescription>
-        </Alert>
-      )}
+     
     </div>
   );
 }

@@ -41,7 +41,7 @@ export function BillingInfo() {
           Open Portal
         </Button>
         <p className="text-sm text-gray-500 mt-2">
-         We're using Stripe to manage your billing information. You can change your billing information via Stripe Customer Portal.
+         We&apos;re using Stripe to manage your billing information. You can change your billing information via Stripe Customer Portal.
         </p>
       </div>
     </div>
