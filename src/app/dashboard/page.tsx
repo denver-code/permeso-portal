@@ -70,7 +70,7 @@ function Page(): JSX.Element {
         <div className="flex  flex-col justify-between">
           {
             activities.activity.map((activity) => (
-                <div className="flex flex-row justify-between pb-8">
+                <div key={activity.council} className="flex  justify-between pb-8">
                     <div className="ml-4 space-y-1">
                        <div className="flex flex-row space-x-3">
                         <p className="text-m md:text-lg font-medium leading-none flex space-x-2">
