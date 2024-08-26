@@ -121,25 +121,27 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     </Button>
                 </div>
             </form>
-            <div className="relative">
+            {/* <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t"/>
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-                </div>
-            </div>
-            <Button variant="outline" type="button" disabled={isLoading}>
-                {isLoading ? (
-                    <Loader className="mr-2 h-4 w-4 animate-spin"/>
-                ) : (
-                    <Github className="mr-2 h-4 w-4"/>
-                )}{" "}
-                GitHub
-            </Button>
-            <div className="relative">
+                    <span className="bg-background px-2 text-muted-foreground">
+                        Or continue with
+                    </span>
+                            </div>
+                        </div> */}
+                        {/* <Button variant="outline" type="button" disabled={isLoading}>
+                            {isLoading ? (
+                                <Loader className="mr-2 h-4 w-4 animate-spin"/>
+                            ) : (
+                                <Github className="mr-2 h-4 w-4"/>
+                            )}{" "}
+                            GitHub
+                        </Button> */}
+           {
+            isSignIn ? <>
+             <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t"/>
                 </div>
@@ -149,12 +151,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </span>
                 </div>
             </div>
-            <Button variant="secondary" disabled={isLoading}>
+            <Button variant="secondary" disabled={isLoading} onClick={()=>{
+                router.push("/forgot-password")
+            }}>
                 {isLoading && (
                     <Loader className="mr-2 h-4 w-4 animate-spin"/>
                 )}
                 Reset Password
-            </Button>
+            </Button></> : null
+           }
         </div>
     )
 }
