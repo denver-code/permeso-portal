@@ -76,7 +76,7 @@ function Page(): JSX.Element {
                         <p className="text-m md:text-lg font-medium leading-none flex space-x-2">
                                 {activity.council.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                             </p>
-                            <Badge>{activity.status.replace(/\b\w/g, l => l.toUpperCase())}</Badge>
+                            <Badge className="hidden md:block">{activity.status.replace(/\b\w/g, l => l.toUpperCase())}</Badge>
                         </div>
                         <p className="text-md text-muted-foreground">
                         {activity.date}

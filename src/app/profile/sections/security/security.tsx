@@ -73,7 +73,7 @@ if (isLoading) return <>
           variant="outline"
           size="sm"
           className="mt-2"
-          onClick={() => requestChange("Name")}
+          onClick={() => requestResetPassword()}
         >
           Reset Password
         </Button>
@@ -81,9 +81,16 @@ if (isLoading) return <>
       </div>
 
       <div>
+        <div className="flex space-x-4">
         <h2 className="text-lg font-semibold mb-2">PAT</h2>
-        
-        <div className="flex flex-row space-x-4">
+        <div>
+         <Badge variant={
+            pat?.is_active ? "default" : "destructive"
+         }>
+            {pat?.is_active ? "Active" : "Inactive"}
+          </Badge>
+         </div>
+         </div>
         <div>
         <TooltipProvider>
           <Tooltip>
@@ -106,15 +113,9 @@ if (isLoading) return <>
         </p>
         </div>
 
-         <div>
-         <Badge variant={
-            pat?.is_active ? "default" : "destructive"
-         }>
-            {pat?.is_active ? "Active" : "Inactive"}
-          </Badge>
-         </div>
+        
 
-        </div>
+
        
        <div className="flex space-x-4 flex-row">
         <Button
