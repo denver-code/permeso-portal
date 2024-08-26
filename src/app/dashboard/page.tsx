@@ -78,9 +78,14 @@ function Page(): JSX.Element {
                             </p>
                             <Badge className="hidden md:block">{activity.status.replace(/\b\w/g, l => l.toUpperCase())}</Badge>
                         </div>
+                      <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4">
                         <p className="text-md text-muted-foreground">
-                        {activity.date}
-                        </p>
+                          {activity.date}
+                          </p>
+                          <p className="text-md text-muted-foreground">
+                          {activity.total_applications} Applications
+                          </p>
+                        </div>
                     </div>
                     
                     <div className="ml-auto mr-4 font-medium">

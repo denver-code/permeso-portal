@@ -19,6 +19,7 @@ interface Activity {
     date: string;
     status: string;
     type: string;
+    total_applications: number;
     download_link: string;
 }
 
