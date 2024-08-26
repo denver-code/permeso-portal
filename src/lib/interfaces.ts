@@ -33,6 +33,7 @@ interface ProfileResponse {
     data: {
         email: string | "";
         name: string | "";
+        has_pat: boolean | false;
     };
     status: string;
 }
