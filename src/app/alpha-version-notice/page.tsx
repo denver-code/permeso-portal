@@ -18,7 +18,7 @@ export default function Page() {
           <p>
            The Permeso Service allows you to get access to Planning applications fro multiple service at the same time. However as of 27th August 2024, the service is in Alpha version and may not be fully functional.
            This means that the service may not work as expected and may have bugs, errors or other issues that affect the user experience, if you encounter any issues please report them to us.
-           Unfortunally we can't guarantee that the service will work as expected and we can't be held responsible for any issues that may arise from using the service, as some functionality highly depends on the other services, e.g  the council websites, which we have no control over.  <br/>
+           Unfortunally we can&apos;t guarantee that the service will work as expected and we can&apos;t be held responsible for any issues that may arise from using the service, as some functionality highly depends on the other services, e.g  the council websites, which we have no control over.  <br/>
            Some features might be changed/removed/migrated to other services during the development process.
           </p>
         </section>
