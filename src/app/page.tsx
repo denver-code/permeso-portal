@@ -36,7 +36,9 @@ export default function Home() {
             <Link href="/" prefetch={false}>
               <span className="font-bold">Permeso</span>
             </Link>
-            <Badge>Alpha | Early Access</Badge>
+            <Link href='/alpha-version-notice'>
+              <Badge>Alpha | Early Access</Badge>
+            </Link>
           </div>
 
           <nav className="ml-auto flex gap-4 sm:gap-6">

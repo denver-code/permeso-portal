@@ -25,7 +25,10 @@ export function Navbar(){
         <Link href="/dashboard" prefetch={false}>
           <span className="font-bold">Permeso</span>
         </Link>
-        <Badge className="hidden md:block">Alpha | Early Access</Badge>
+        <Link href='/alpha-version-notice'>
+              <Badge className="hidden md:block">Alpha | Early Access</Badge>
+            </Link>
+        
       </div>
           <MainNav className="mx-6" />
           <div className="ml-auto flex items-center space-x-4">

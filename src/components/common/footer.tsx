@@ -17,7 +17,9 @@ export function Footer() {
               <Link href="/" prefetch={false}>
                 <span className="font-bold">Permeso</span>
               </Link>
+              <Link href='/alpha-version-notice'>
               <Badge>Alpha | Early Access</Badge>
+            </Link>
             </div>
 
             Built by{" "}
