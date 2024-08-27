@@ -40,25 +40,6 @@ export default function Home() {
           </div>
 
           <nav className="ml-auto flex gap-4 sm:gap-6">
-
-            {/*{*/}
-            {/*  user ? (*/}
-            {/*      <Link href="/dashboard">*/}
-            {/*        <Button size="sm">Dashboard</Button>*/}
-            {/*      </Link>*/}
-            {/*  ) : (*/}
-            {/*     <div className="flex gap-4">*/}
-            {/*         <Link href="/signin">*/}
-            {/*            <Button size="sm">Sign In</Button>*/}
-            {/*         </Link>*/}
-            {/*        <Link href="/signup">*/}
-            {/*                <Button size="sm">Sign Up</Button>*/}
-            {/*          </Link>*/}
-            {/*     </div>*/}
-            {/*  )*/}
-
-            {/*}*/}
-
             {
                 user ? (
                     <div className="mr-4">
@@ -103,7 +84,6 @@ export default function Home() {
 
         <main>
           <HorizontalHero/>
-
           <section id="features" className="w-full ">
             <div className="container px-4 md:px-6 mx-auto">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -129,8 +109,8 @@ export default function Home() {
                       <div className="grid gap-1">
                         <h3 className="text-xl font-bold">Automated Parsing</h3>
                         <p className="text-muted-foreground">
-                          Our service automatically extracts relevant permissions data from council websites daily,
-                          saving you time and effort.
+                          Our service automatically extracts relevant permissions data from council websites daily then sending email to you,
+                          and by doing that it is saving you time and effort.
                         </p>
                       </div>
                     </li>
@@ -150,12 +130,16 @@ export default function Home() {
                           Integrate our service seamlessly into your existing workflow, reducing manual tasks and
                           improving efficiency.
                         </p>
+                        <p className="text-muted-foreground">
+                         This could be done by manual dashboard download, email delivery or via API integration.
+                        </p>
+                        
                       </div>
                     </li>
                   </ul>
                 </div>
                 <img
-                    src="/placeholder.svg"
+                    src="/demo2.png"
                     width="550"
                     height="310"
                     alt="Image"
@@ -202,7 +186,9 @@ export default function Home() {
                         Basic support
                       </li>
                     </ul>
-                    <Button className="w-full">Get Started</Button>
+                     <Button className="w-full" asChild>
+                        <Link href={"/signup"}>Get Started</Link>
+                    </Button>
                   </Card>
                   <Card className="border-primary p-6 space-y-4">
                     <div className="space-y-2">
@@ -234,7 +220,9 @@ export default function Home() {
                         Priority support
                       </li>
                     </ul>
-                    <Button className="w-full">Get Started</Button>
+                     <Button className="w-full" asChild>
+                        <Link href={"/signup"}>Get Started</Link>
+                    </Button>
                   </Card>
                   <Card className="border-primary p-6 space-y-4">
                     <div className="space-y-2">
@@ -359,6 +347,19 @@ export default function Home() {
                         Coming soon....
                       </AccordionContent>
                     </AccordionItem>
+                     <AccordionItem value="item-4">
+                      <AccordionTrigger>How do I collect the data?</AccordionTrigger>
+                      <AccordionContent>
+                        <p>In your dashboard, you can set up the collection days, receiving method and the system will automatically parse the data for you (at 04:00 o&apos;clock), then send you it over the email (at 07:00 o&apos;clock).</p>
+                        <p className="pt-4">Alternatively you can download the data for each individual council from the dashboard overview page, Recent activity section.</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-5">
+                      <AccordionTrigger>When does data gets collected? What is the time range?</AccordionTrigger>
+                      <AccordionContent>
+                        <p>Data gets collected everyday at 04:00 O&apos;clock by our automatic system in range of the &apos;&apos;7 days ago to Today&apos;&apos; or in other terms for the past week.</p>
+                      </AccordionContent>
+                    </AccordionItem>
                   </Accordion>
 
                 </div>
@@ -379,7 +380,9 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="py-12 text-start">
-                    <Button className="w-full" size="lg">Get Started</Button>
+                    <Button className="w-full" size="lg" asChild>
+                        <Link href={"/signup"}>Get Started</Link>
+                    </Button>
 
                 </div>
               </div>
