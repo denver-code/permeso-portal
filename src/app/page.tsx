@@ -21,68 +21,14 @@ import { JSX, SVGProps } from 'react';
 import {HorizontalHero} from "@/components/common/horizontaHero";
 import {Badge} from "@/components/ui/badge";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import { PublicNavbar } from "@/components/common/publicNabar";
 
 export default function Home() {
   const {user} = useAuthContext() as { user: any };
 
   return (
       <div className="text-foreground">
-        <header className="px-4 lg:px-6 h-14 flex items-center">
-          <div className="flex flex-row space-x-4">
-            <Link href="/" className="flex items-center justify-center" prefetch={false}>
-              <MountainIcon className="h-6 w-6 text-primary"/>
-              <span className="sr-only">Permeso</span>
-            </Link>
-            <Link href="/" prefetch={false}>
-              <span className="font-bold">Permeso</span>
-            </Link>
-            <Link href='/alpha-version-notice'>
-              <Badge>Alpha | Early Access</Badge>
-            </Link>
-          </div>
-
-          <nav className="ml-auto flex gap-4 sm:gap-6">
-            {
-                user ? (
-                    <div className="mr-4">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger>
-                          <Button size="sm" asChild>
-                            <Link href={"/dashboard"}>Account</Link>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                          <DropdownMenuItem asChild>
-                            <Link href={"/dashboard"}>Dashboard</Link>
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator/>
-                          <DropdownMenuItem asChild>
-                            <Link href={"/logout"}>Logout</Link>
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                ) : (
-                  <div className="mr-4">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <Button size="sm">Menu</Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuItem asChild>
-                          <Link href={"/signin"}>Sign In</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link href={"/signup"}>Sign Up</Link>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                )
-            }
-
-          </nav>
-        </header>
+       <PublicNavbar/>
 
         <main>
           <HorizontalHero/>
@@ -334,7 +280,7 @@ export default function Home() {
                     <AccordionItem value="item-1">
                       <AccordionTrigger>How do I know which councils supported?</AccordionTrigger>
                       <AccordionContent>
-                        Coming soon....
+                        Please follow the link to the <Link href="/active-councils" className="text-blue-600 hover:underline">Councils</Link> page.
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
