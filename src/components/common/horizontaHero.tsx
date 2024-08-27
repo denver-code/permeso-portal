@@ -21,11 +21,16 @@ export function HorizontalHero() {
                                 letters that are ready to be send to your new potential clients!
                             </p>
                         </div>
-                        <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                        <div className="flex flex-col gap-4 min-[400px]:flex-row">
                             <Button size="lg" onClick={()=>{
                                 router.push("/signup")
                             }}>
                                 Get Started
+                            </Button>
+                             <Button size="lg" onClick={()=>{
+                                router.push("/signup")
+                            }} variant="secondary" >
+                                Watch Demo
                             </Button>
                         </div>
                     </div>
