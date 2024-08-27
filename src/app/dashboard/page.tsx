@@ -70,13 +70,13 @@ function Page(): JSX.Element {
         <div className="flex  flex-col justify-between">
           {
             activities.activity.map((activity) => (
-                <div key={activity.council} className="flex  justify-between pb-8">
+                <div key={activity.council} className="flex justify-between  bg-zinc-900 mb-4 py-4 rounded-lg">
                     <div className="ml-4 space-y-1">
                        <div className="flex flex-row space-x-3">
                         <p className="text-m md:text-lg font-medium leading-none flex space-x-2">
                                 {activity.council.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                             </p>
-                            <Badge className="hidden md:block">{activity.status.replace(/\b\w/g, l => l.toUpperCase())}</Badge>
+                            <Badge className="hidden md:block my-auto">{activity.status.replace(/\b\w/g, l => l.toUpperCase())}</Badge>
                         </div>
                       <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4">
                         <p className="text-md text-muted-foreground">
@@ -88,7 +88,7 @@ function Page(): JSX.Element {
                         </div>
                     </div>
                     
-                    <div className="ml-auto mr-4 font-medium">
+                    <div className="ml-auto mr-4 font-medium my-auto">
                         <Button size="sm" onClick={()=>{
                     fetch(activity.download_link, {
                         headers: {
